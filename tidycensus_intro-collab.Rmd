@@ -261,8 +261,13 @@ Directions:
 Investigating (insert variable here) on Oahu at the census tract level.
 
 *Mehana and Alex Variable identification
+
+First variables for map:
 DP03_0014 = Estimate!! employment status own children of the household are under 6 years 
 DP03_0016 = Estimate employment status own children of the house hold 6-17 years
+
+Second variable for our scatter plot:
+DP05_0082 = estimate of Hispanic or Latino and race. total population. not Hispanic or Latino. Asian alone
 
 ```{r, message=FALSE, warning=FALSE, results='hide'}
 
