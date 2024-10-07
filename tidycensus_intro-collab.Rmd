@@ -260,6 +260,10 @@ Directions:
 
 Investigating (insert variable here) on Oahu at the census tract level.
 
+*Mehana and Alex Variable identification
+DP03_0014 = Estimate!! employment status own children of the household are under 6 years 
+DP03_0016 = Estimate employment status own children of the house hold 6-17 years
+
 ```{r, message=FALSE, warning=FALSE, results='hide'}
 
 

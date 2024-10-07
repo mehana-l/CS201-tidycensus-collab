@@ -50,7 +50,7 @@ In more recent versions of R Studio, you may see a yellow ribbon at the top of t
 ```{r setup, eval=FALSE}
 install.packages("tidycensus")
 #install.packages("tidyverse")
-#install.packages("reactable")
+install.packages("reactable")
 install.packages("ggiraph")
 install.packages("ggpubr")
 ```
@@ -157,7 +157,7 @@ family_poverty_2009_2019 <- map_dfr(years, ~{
     state = "HI",
     county = "Honolulu",
     year = .x,
-    survey = "acs1"
+    survey = "acs5"
   )
 }, .id = "year")
 ```
