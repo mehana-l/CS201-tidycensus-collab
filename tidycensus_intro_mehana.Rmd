@@ -274,7 +274,7 @@ DP05_0082 = estimate of Hispanic or Latino and race. total population. not Hispa
 ```{r, message=FALSE, warning=FALSE, results='hide'}
 acs_2022_variables <- get_acs(
   geography = "tract",
-  variables = c(estimate_of_children_under6 = "DP03_0014", estimate_of_children_over6 = "DP03_0016"), 
+  variables = c(percent_of_children_under6 = "DP03_0014P", percent_of_children_over6 = "DP03_0016P"), 
   state = "CA",
   county = "Orange",
   geometry = TRUE,
@@ -283,19 +283,21 @@ acs_2022_variables <- get_acs(
 
 ```
 
+
+
 ```{r}
 children_california_map <- ggplot(acs_2022_variables) +
   geom_sf_interactive(
     aes(
-      fill = estimate_of_children_under6E | estimate_of_children_over6E, 
-      tooltip = paste(NAME, ": ", estimate_of_children_under6E | estimate_of_children_over6E, "%"),
+      fill = percent_of_children_under6E | percent_of_children_over6E, 
+      tooltip = paste(NAME, ": ", percent_of_children_under6E | percent_of_children_over6E, "%"),
       data_id = NAME
     )
   ) +
-  scale_fill_viridis_c(option = "magma") +
+  scale_fill_viridis_d(option = "blue") +
   theme_void() 
 
-girafe(ggobj = children_california_map, width = 800, height = 800)
+girafe(ggobj = children_california_map, width = 800, height = 500)
 
 ```
 
@@ -303,8 +305,26 @@ girafe(ggobj = children_california_map, width = 800, height = 800)
 ### Challenge: Mapping
 
 ```{r, message=FALSE, warning=FALSE, results='hide'}
+years <- 2015:2022
+names(years) <- years
 
+percent_employment_2015_2022 <- map_dfr(years, ~{
+  get_acs(
+    geography = "county",
+    variables = c(percent_of_employed_over_16 = "DP03_0001P"),
+    state = "CA",
+    county = "Orange",
+    year = .x,
+    survey = "acs5"
+  )
+}, .id = "year")
 
+```
+
+```{r}
+ggplot(percent_employment_2015_2022, aes(x= year, y = estimate)) + 
+  geom_line() + 
+  geom_point()
 ```
 
 ### Challenge: Time Series
