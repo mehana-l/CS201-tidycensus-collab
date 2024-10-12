@@ -304,6 +304,8 @@ girafe(ggobj = children_california_map, width = 800, height = 500)
 
 ### Challenge: Mapping
 
+
+
 ```{r, message=FALSE, warning=FALSE, results='hide'}
 years <- 2015:2022
 names(years) <- years
@@ -329,9 +331,32 @@ ggplot(percent_employment_2015_2022, aes(x= year, y = estimate)) +
 
 ### Challenge: Time Series
 
-```{r, message=FALSE, warning=FALSE, results='hide'}
+variable 1 "DP02_0053P" children over 3 in school
+variable 2 "DP02_0152P" with computer and internet
+
+```{r, message=FALSE}
+school_children_with_digital_access <- get_acs(
+  geography = "tract",
+  variables = c(percent_of_children_in_school = "DP02_0053P",
+                percent_of_households_with_computer_and_internet = "DP02_0152P"),
+  state = "CA",
+  county = "Orange",
+  #geometry = TRUE,
+  output = "wide",
+  year = 2021
+)
 
 
+```
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(school_children_with_digital_access, aes(x = percent_of_children_in_school,
+                                             y = percent_of_households_with_computer_and_internet)) +
+  geom_point() +
+  geom_smooth() +
+  stat_cor() +
+  theme_minimal()
+  
 ```
 
 ### Challenge: Scatter Plot
