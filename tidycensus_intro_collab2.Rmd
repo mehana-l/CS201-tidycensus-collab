@@ -308,10 +308,10 @@ girafe(ggobj = children_california_map, width = 800, height = 500)
 years <- 2015:2022
 names(years) <- years
 
-percent_employment_2015_2022 <- map_dfr(years, ~{
+family_poverty_2009_2019 <- map_dfr(years, ~{
   get_acs(
     geography = "county",
-    variables = c(percent_of_employed_over_16 = "DP03_0001P"),
+    variables = c(percent_of_unemployed_over_16 = "DP03_0001P"),
     state = "CA",
     county = "Orange",
     year = .x,
@@ -322,9 +322,7 @@ percent_employment_2015_2022 <- map_dfr(years, ~{
 ```
 
 ```{r}
-ggplot(percent_employment_2015_2022, aes(x= year, y = estimate)) + 
-  geom_line() + 
-  geom_point()
+
 ```
 
 ### Challenge: Time Series
